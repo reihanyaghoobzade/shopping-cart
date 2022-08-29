@@ -3,8 +3,7 @@ export default {
     head: {
         title: 'سبد خرید',
         htmlAttrs: {
-            lang: 'fa',
-            dir: 'rtl'
+            lang: 'en',
         },
         meta: [
             { charset: 'utf-8' },
@@ -50,7 +49,7 @@ export default {
     // Axios module configuration: https://go.nuxtjs.dev/config-axios
     axios: {
         // Workaround to avoid enforcing hard-coded localhost:3000: https://github.com/nuxt-community/axios-module/issues/308
-        baseURL: '/',
+        baseURL: 'https://fakestoreapi.com',
     },
 
     // Build Configuration: https://go.nuxtjs.dev/config-build
