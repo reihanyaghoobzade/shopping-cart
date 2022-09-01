@@ -27,9 +27,20 @@
 export default {
   name: 'SingleProductPage',
   async asyncData(context) {
-    const response = await context.$axios.$get(`/products/${context.params.id}`)
-    response.quantity = 0
-    return { item: { ...response } }
+    try {
+      const response = await context.$axios.$get(
+        `/products/${context.params.id}`
+      )
+      response.quantity = 0
+      return { item: { ...response } }
+    } catch (error) {
+      console.error(error)
+    }
+  },
+  head() {
+    return {
+      title: this.item.title,
+    }
   },
   methods: {
     addToCart() {
@@ -43,11 +54,9 @@ export default {
         this.item.quantity = 1
       }
 
-      carts.push(this.item)
+      carts.unshift(this.item)
       localStorage.setItem('carts', JSON.stringify(carts))
     },
   },
 }
 </script>
-
-<style></style>

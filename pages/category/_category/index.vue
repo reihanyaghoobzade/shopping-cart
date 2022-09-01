@@ -10,18 +10,20 @@
 
 <script>
 export default {
-  name: 'IndexPage',
+  name: 'CategoryPage',
+  head() {
+    return {
+      title: `Cart | ${this.$route.params.category}`,
+    }
+  },
   async asyncData(context) {
     try {
-      const response = await context.$axios.$get('/products')
+      const response = await context.$axios.$get(
+        `/products/category/${context.params.category}`
+      )
       return { items: { ...response } }
     } catch (error) {
       console.error(error)
-    }
-  },
-  head() {
-    return {
-      title: 'Products',
     }
   },
 }

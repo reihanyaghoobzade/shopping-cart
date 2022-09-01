@@ -28,6 +28,51 @@
           </nuxt-link>
         </div>
       </div>
+      <hr />
+      <div
+        class="flex gap-4 items-center py-4 w-1/4 relative"
+        @mouseover="showCategories = true"
+        @mouseleave="showCategories = false"
+      >
+        <span class="font-bold text-2xl">Categories</span>
+        <img
+          src="~/assets/images/arrow.png"
+          alt=""
+          class="transition-all duration-200"
+          :class="{ 'rotate-180': showCategories }"
+        />
+        <div
+          class="absolute top-full -left-4 flex flex-col gap-4 px-4 text-lg font-bold bg-white h-0 w-full overflow-hidden transition-all z-20 rounded-b-lg"
+          :class="{ 'h-56': showCategories }"
+          @mouseover="showCategories = true"
+          @mouseleave="showCategories = false"
+        >
+          <nuxt-link
+            to="/category/electronics"
+            class="w-full hover:text-purple-700 transition"
+            >Electronics</nuxt-link
+          >
+          <hr />
+          <nuxt-link
+            to="/category/jewelery"
+            class="w-full hover:text-purple-700 transition"
+            >Jewelery</nuxt-link
+          >
+          <hr />
+          <nuxt-link
+            to="/category/men's clothing"
+            class="w-full hover:text-purple-700 transition"
+            >Men's clothing</nuxt-link
+          >
+          <hr />
+          <nuxt-link
+            to="/category/women's clothing"
+            class="w-full hover:text-purple-700 transition"
+            >Women's clothing</nuxt-link
+          >
+          <hr />
+        </div>
+      </div>
     </section>
   </header>
 </template>
@@ -35,6 +80,20 @@
 <script>
 export default {
   name: 'HeaderComponent',
+  // async asyncData(context) {
+  //   try {
+  //     const response = await context.$axios.$get('/products/categories')
+  //     console.log(response)
+  //     return { 1: 1 }
+  //   } catch (error) {
+  //     console.error(error)
+  //   }
+  // },
+  data() {
+    return {
+      showCategories: false,
+    }
+  },
   computed: {
     cartNumber() {
       let number = false
@@ -48,5 +107,3 @@ export default {
   },
 }
 </script>
-
-<style></style>

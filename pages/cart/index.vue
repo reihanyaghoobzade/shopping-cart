@@ -59,11 +59,12 @@
             <span>The amount payable</span>
             <span>{{ totalPrice }} $</span>
           </div>
-          <div
+          <nuxt-link
+            to="/cart/shipping"
             class="w-full bg-purple-400 text-white text-xl text-center py-2 mt-4 rounded-lg transition ring-offset-2 ring-purple-400 hover:ring-2"
           >
             Continue
-          </div>
+          </nuxt-link>
         </div>
       </div>
     </div>
@@ -73,6 +74,11 @@
 <script>
 export default {
   name: 'CartPage',
+  head() {
+    return {
+      title: 'Cart',
+    }
+  },
   data() {
     return {
       carts: [],
