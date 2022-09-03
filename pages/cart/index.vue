@@ -59,12 +59,13 @@
             <span>The amount payable</span>
             <span>{{ totalPrice }} $</span>
           </div>
-          <nuxt-link
-            to="/cart/shipping"
+          <div
             class="w-full bg-purple-400 text-white text-xl text-center py-2 mt-4 rounded-lg transition ring-offset-2 ring-purple-400 hover:ring-2"
+            @click="checkLogin"
           >
             Continue
-          </nuxt-link>
+          </div>
+          <Auth v-if="showAuth" @close="showAuth = false" />
         </div>
       </div>
     </div>
@@ -74,20 +75,18 @@
 <script>
 export default {
   name: 'CartPage',
-  head() {
-    return {
-      title: 'Cart',
-    }
-  },
   data() {
     return {
       carts: [],
       right: false,
       left: true,
+      showAuth: false,
     }
   },
-  mounted() {
-    this.carts = JSON.parse(localStorage.getItem('carts')) || []
+  head() {
+    return {
+      title: 'Cart',
+    }
   },
   computed: {
     totalPrice() {
@@ -99,6 +98,9 @@ export default {
       return total.toFixed(2)
     },
   },
+  mounted() {
+    this.carts = JSON.parse(localStorage.carts) || []
+  },
   methods: {
     addOne(item) {
       const index = this.carts.findIndex((cart) => {
@@ -107,7 +109,7 @@ export default {
 
       item.quantity++
       this.carts.splice(index, 1, item)
-      localStorage.setItem('carts', JSON.stringify(this.carts))
+      localStorage.carts = JSON.stringify(this.carts)
     },
     removeOne(item) {
       const index = this.carts.findIndex((cart) => {
@@ -120,14 +122,19 @@ export default {
         ? this.carts.splice(index, 1)
         : this.carts.splice(index, 1, item)
 
-      localStorage.setItem('carts', JSON.stringify(this.carts))
+      localStorage.carts = JSON.stringify(this.carts)
     },
     removeCart(item) {
       const index = this.carts.findIndex((cart) => {
         return cart.id === item.id
       })
       this.carts.splice(index, 1)
-      localStorage.setItem('carts', JSON.stringify(this.carts))
+      localStorage.carts = JSON.stringify(this.carts)
+    },
+    checkLogin() {
+      localStorage.Login
+        ? this.$router.push({ path: '/cart/shipping' })
+        : (this.showAuth = true)
     },
   },
 }

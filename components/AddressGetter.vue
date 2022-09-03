@@ -9,10 +9,10 @@
           <span class="text-red-400">*</span>
         </label>
         <input
-          type="text"
           id="recipient-name"
-          placeholder="Name"
           v-model.lazy="form.name"
+          type="text"
+          placeholder="Name"
           class="p-2 border-2 border-black outline-none rounded"
           :class="{ 'border-red-400': border.name }"
         />
@@ -24,18 +24,18 @@
         </label>
         <div class="w-full flex gap-4">
           <input
-            type="text"
             id="city"
-            placeholder="City"
             v-model.lazy="form.city"
+            type="text"
+            placeholder="City"
             class="w-full p-2 border-2 border-black outline-none rounded"
             :class="{ 'border-red-400': border.city }"
           />
           <input
-            type="text"
             id="city"
-            placeholder="Province"
             v-model.lazy="form.province"
+            type="text"
+            placeholder="Province"
             class="w-full p-2 border-2 border-black outline-none rounded"
             :class="{ 'border-red-400': border.province }"
           />
@@ -47,10 +47,10 @@
           <span class="text-red-400">*</span>
         </label>
         <input
-          type="text"
           id="address"
-          placeholder="Address"
           v-model.lazy="form.address"
+          type="text"
+          placeholder="Address"
           class="p-2 border-2 border-black outline-none rounded"
           :class="{ 'border-red-400': border.address }"
         />
@@ -62,10 +62,10 @@
             <span class="text-red-400">*</span>
           </label>
           <input
-            type="text"
             id="postal-code"
-            placeholder="Example: 1234567890"
             v-model.lazy="form.postalCode"
+            type="text"
+            placeholder="Example: 1234567890"
             class="w-full p-2 border-2 border-black outline-none rounded"
             :class="{ 'border-red-400': border.postalCode }"
           />
@@ -76,10 +76,10 @@
             <span class="text-red-400">*</span></label
           >
           <input
-            type="text"
             id="phone-number"
-            placeholder="Example: 0912*******"
             v-model.lazy="form.phoneNumber"
+            type="text"
+            placeholder="Example: 0912*******"
             class="w-full p-2 border-2 border-black outline-none rounded"
             :class="{ 'border-red-400': border.phoneNumber }"
           />
@@ -87,13 +87,13 @@
       </div>
       <div class="flex justify-end items-center gap-4">
         <div
-          class="py-2 px-4 bg-purple-500 font-bold text-white rounded-lg border-2 border-purple-500 cursor-pointer"
+          class="py-2 w-24 text-center bg-purple-500 font-bold text-white rounded-lg border-2 border-purple-500 transition ring-offset-2 ring-purple-400 hover:ring-2 cursor-pointer"
           @click="sendAddress"
         >
           Ok
         </div>
         <div
-          class="py-2 px-4 border-2 border-purple-500 font-bold text-purple-500 hover:bg-[#C084FC40] transition rounded-lg cursor-pointer"
+          class="py-2 w-24 text-center border-2 border-purple-500 font-bold text-purple-500 hover:bg-[#C084FC40] transition rounded-lg cursor-pointer"
           @click="$emit('close')"
         >
           Cancel
@@ -141,7 +141,7 @@ export default {
         this.form.phoneNumber &&
         this.form.postalCode
       )
-        this.$emit('sendAddress', this.form) && console.log('injaeeim')
+        this.$emit('sendAddress', this.form)
 
       if (!this.form.name) this.border.name = true
       if (!this.form.city) this.border.city = true

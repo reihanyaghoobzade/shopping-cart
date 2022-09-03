@@ -8,11 +8,19 @@
           </nuxt-link>
         </div>
         <div class="flex gap-8">
-          <div class="flex flex-col gap-2 items-center justify-center">
+          <div
+            class="flex flex-col gap-2 items-center justify-center"
+            @click="showAuth = true"
+          >
             <img src="~/assets/images/profile.png" alt="" />
-            <span class="text-purple-700 font-semibold">Login / Sign Up</span>
-            <!-- <span>پروفایل</span> -->
+            <span v-if="!isLogin" class="text-purple-700 font-semibold"
+              >Login / Sign Up</span
+            >
+            <span v-if="isLogin" class="text-purple-700 font-semibold"
+              >Profile</span
+            >
           </div>
+          <Auth v-if="showAuth" @close="showAuth = false" />
           <nuxt-link
             to="/cart"
             class="flex flex-col gap-2 items-center justify-center relative"
@@ -80,30 +88,33 @@
 <script>
 export default {
   name: 'HeaderComponent',
-  // async asyncData(context) {
-  //   try {
-  //     const response = await context.$axios.$get('/products/categories')
-  //     console.log(response)
-  //     return { 1: 1 }
-  //   } catch (error) {
-  //     console.error(error)
-  //   }
-  // },
   data() {
     return {
       showCategories: false,
+      showAuth: false,
     }
   },
   computed: {
     cartNumber() {
-      let number = false
       if (this.$route && process.client) {
-        JSON.parse(localStorage.getItem('carts')).length === 0
-          ? (number = false)
-          : (number = true)
+        const number = JSON.parse(localStorage.carts).length
+        if (number !== 0) {
+          return true
+        } else {
+          return false
+        }
+      } else {
+        return false
       }
-      return number
+    },
+    isLogin() {
+      if (process.client) {
+        return localStorage.Login || false
+      } else {
+        return false
+      }
     },
   },
+  methods: {},
 }
 </script>

@@ -37,9 +37,25 @@
         </div>
         <div>{{ form.name }}</div>
         <div>{{ form.address }}</div>
-        <div class="flex gap-8">
-          <div>Postal number: {{ form.postalCode }}</div>
-          <div>Phone number: {{ form.phoneNumber }}</div>
+        <div class="flex justify-between items-center gap-8">
+          <div class="flex gap-8">
+            <div>Postal number: {{ form.postalCode }}</div>
+            <div>Phone number: {{ form.phoneNumber }}</div>
+          </div>
+          <div class="flex gap-4">
+            <nuxt-link
+              to="/cart/payment"
+              class="px-10 py-2 border-2 border-purple-500 text-white font-bold bg-purple-500 rounded-lg"
+            >
+              Choose Address
+            </nuxt-link>
+            <div
+              class="px-10 py-2 border-2 border-purple-500 text-purple-500 font-bold transition hover:bg-[#C084FC30] rounded-lg"
+              @click="showAddressGetter = true"
+            >
+              Change Address
+            </div>
+          </div>
         </div>
       </div>
       <AddressGetter
@@ -54,20 +70,30 @@
 <script>
 export default {
   name: 'AddressPage',
-  head() {
-    return {
-      title: 'Cart | Address',
-    }
-  },
   data() {
     return {
       showAddressGetter: true,
       form: {},
     }
   },
+  head() {
+    return {
+      title: 'Cart | Address',
+    }
+  },
+
+  mounted() {
+    if (!localStorage.Login) this.$router.push({ path: '/cart' })
+
+    if (localStorage.address) {
+      this.form = JSON.parse(localStorage.address)
+      this.showAddressGetter = false
+    }
+  },
   methods: {
     sendAddress(event) {
       console.log(event)
+      localStorage.address = JSON.stringify(event)
       this.form = { ...event }
       this.showAddressGetter = false
     },

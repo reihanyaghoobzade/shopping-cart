@@ -50,6 +50,7 @@ export default {
     axios: {
         // Workaround to avoid enforcing hard-coded localhost:3000: https://github.com/nuxt-community/axios-module/issues/308
         baseURL: 'https://fakestoreapi.com',
+        fbAPIKey: 'AIzaSyBf79DRZr28OxmOMR3H0jSyTP1nn1nYNqg'
     },
 
     // Build Configuration: https://go.nuxtjs.dev/config-build
