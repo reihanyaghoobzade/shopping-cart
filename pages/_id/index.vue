@@ -44,7 +44,7 @@ export default {
   },
   methods: {
     addToCart() {
-      const carts = JSON.parse(localStorage.getItem('carts')) || []
+      const carts = JSON.parse(localStorage.carts) || []
 
       if (carts.some((item) => item.id === this.item.id)) {
         const cart = carts.find((item) => item.id === this.item.id)
@@ -55,7 +55,7 @@ export default {
       }
 
       carts.unshift(this.item)
-      localStorage.setItem('carts', JSON.stringify(carts))
+      localStorage.carts = JSON.stringify(carts)
     },
   },
 }
