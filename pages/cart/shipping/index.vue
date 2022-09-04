@@ -81,7 +81,6 @@ export default {
       title: 'Cart | Address',
     }
   },
-
   mounted() {
     if (!localStorage.Login) this.$router.push({ path: '/cart' })
 

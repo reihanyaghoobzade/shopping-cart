@@ -61,6 +61,11 @@ export default {
       payable: 0,
     }
   },
+  head() {
+    return {
+      title: 'Cart | Payment',
+    }
+  },
   mounted() {
     JSON.parse(localStorage.carts).forEach((cart) => {
       this.payable = this.totalPrice += cart.price * cart.quantity
