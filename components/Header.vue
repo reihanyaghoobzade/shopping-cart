@@ -97,7 +97,9 @@ export default {
   computed: {
     cartNumber() {
       if (this.$route && process.client) {
-        const number = JSON.parse(localStorage.carts).length
+        const number = localStorage.carts
+          ? JSON.parse(localStorage.carts).length
+          : 0
         if (number !== 0) {
           return true
         } else {
@@ -108,7 +110,7 @@ export default {
       }
     },
     isLogin() {
-      if (process.client) {
+      if (this.$route && process.client) {
         return localStorage.Login || false
       } else {
         return false

@@ -67,6 +67,8 @@ export default {
     }
   },
   mounted() {
+    if (!localStorage.Login) this.$router.push({ path: '/cart' })
+
     JSON.parse(localStorage.carts).forEach((cart) => {
       this.payable = this.totalPrice += cart.price * cart.quantity
     })

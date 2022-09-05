@@ -99,7 +99,7 @@ export default {
     },
   },
   mounted() {
-    this.carts = JSON.parse(localStorage.carts) || []
+    this.carts = localStorage.carts ? JSON.parse(localStorage.carts) : []
   },
   methods: {
     addOne(item) {

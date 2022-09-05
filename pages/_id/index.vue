@@ -31,7 +31,6 @@ export default {
       const response = await context.$axios.$get(
         `/products/${context.params.id}`
       )
-      response.quantity = 0
       return { item: { ...response } }
     } catch (error) {
       console.error(error)
@@ -44,17 +43,20 @@ export default {
   },
   methods: {
     addToCart() {
-      const carts = JSON.parse(localStorage.carts) || []
+      const carts = localStorage.carts ? JSON.parse(localStorage.carts) : []
 
       if (carts.some((item) => item.id === this.item.id)) {
-        const cart = carts.find((item) => item.id === this.item.id)
-        carts.pop(cart)
-        this.item.quantity = cart.quantity + 1
+        const index = carts.findIndex((cart) => {
+          return cart.id === this.item.id
+        })
+
+        carts.splice(index, 1, this.item)
+        this.item.quantity++
       } else {
         this.item.quantity = 1
+        carts.unshift(this.item)
       }
 
-      carts.unshift(this.item)
       localStorage.carts = JSON.stringify(carts)
     },
   },
